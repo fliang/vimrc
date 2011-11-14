@@ -10,7 +10,7 @@
 "           has('gui_win32') means Windows 32 bit GUI version.
 "           has('gui_win64') means Windows 64 bit GUI version.
 "           has('gui_running') means in GUI mode.
-" Last Change: 2011-11-14 14:17:30
+" Last Change: 2011-11-14 20:46:24
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -157,7 +157,6 @@ nmap <silent> <unique> gn :call <SID>EchoCharCode()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI {{{
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colo miracle
 if has('gui_running')
     if has('mac')
         set guifont=Monaco:h14
@@ -496,7 +495,7 @@ function s:SetSysTags()
     if has('unix')
         set tags+=$HOME/.vim/systags
     elseif has('win32') || has('win64')
-        set tags+=$VIM/vimfiles/systags
+        set tags+=$TMP/systags
     endif
 endfunction
 
@@ -733,6 +732,16 @@ let g:alternateExtensions_cxx = "h"
 let g:alternateSearchPath = 'sfr:.,sfr:../src,sfr:../include'
 
 " End of a }}}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin - colorscheme {{{
+" http://github.com/fliang/colorscheme
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'fliang/colorscheme'
+colo miracle
+
+" End of colorscheme }}}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1092,10 +1101,11 @@ map <unique> <Leader>T <Plug>TaskList
 " Since this plugin use python script to do some text precessing jobs,
 " add python script path into 'PYTHONPATH' environment variable.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'fliang/vimprj'
 if has('unix')
     let $PYTHONPATH .= $HOME . '/.vim/bundle/vimprj/ftplugin/vimprj/:'
 elseif has('win32') || has('win64')
-    let $PYTHONPATH .= $VIM . '/vimfiles/bundle/vimprj/ftplugin/vimprj/;'
+    let $PYTHONPATH .= $VIM . '/bundle/vimprj/ftplugin/vimprj/;'
 endif
 
 " XXX: Change it. It's just for my environment.
@@ -1107,7 +1117,7 @@ endif
 if has('unix')
     nmap <silent> <Leader>p :call <SID>OpenFileWithProperBuffer('$HOME/.vim/bundle/vimprj/ftplugin/vimprj/projectmgr.vim')<CR>
 elseif has('win32') || has('win64')
-    nmap <silent> <Leader>p :call <SID>OpenFileWithProperBuffer('$VIM/vimfiles/bundle/vimprj/ftplugin/vimprj/projectmgr.vim')<CR>
+    nmap <silent> <Leader>p :call <SID>OpenFileWithProperBuffer('$VIM/bundle/vimprj/ftplugin/vimprj/projectmgr.vim')<CR>
 endif
 
 " End of vimprj }}}
